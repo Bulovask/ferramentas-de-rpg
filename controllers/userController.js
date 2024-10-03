@@ -6,12 +6,11 @@ function randomSufix() {
   return Math.trunc(Math.random() * 100000).toString(36);
 }
 
-// Criar usuário
-exports.createUser = async (req, res) => {
+exports.salvar = async (req, res) => {
   try {
-    const { name, email, password } = JSON.parse(req.body.data);
+    const { nome, email, senha } = JSON.parse(req.body.data);
     const salt = await bcrypt.genSalt(10); // 10 é o número de rounds
-    const hash = await bcrypt.hash(password, salt);
+    const hash = await bcrypt.hash(senha, salt);
     let iconUrl;
 
     if(req.file) {
@@ -21,7 +20,7 @@ exports.createUser = async (req, res) => {
       iconUrl = result.secure_url;
     }
 
-    const user = new User({ name, email, hash, iconUrl });
+    const user = new User({ nome, email, hash, iconUrl });
     await user.save();
     res.status(201).json(user);
   } catch (error) {
@@ -30,8 +29,7 @@ exports.createUser = async (req, res) => {
   }
 };
 
-// Buscar todos os usuários
-exports.getUsers = async (req, res) => {
+exports.pegarTudo = async (req, res) => {
   try {
     const users = await User.find();
     res.json(users);

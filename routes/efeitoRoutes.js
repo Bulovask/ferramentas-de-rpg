@@ -1,5 +1,5 @@
 const express = require('express');
-const { salvar, pegarTudo } = require('../controllers/userController');
+const { salvar, pegarTudo } = require('../controllers/efeitoController');
 const router = express.Router();
 const multer = require('multer');
 const storage = multer.memoryStorage();

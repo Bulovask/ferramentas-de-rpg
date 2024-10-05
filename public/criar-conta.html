@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RPG Tools</title>
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+  <header>
+
+  </header>
+  <main>
+    <section class="main">
+  <form id="form">
+    <h1>Crie uma Conta</h1>
+    <div>
+      <label for="icon">Foto</label>
+      <input type="file">
+    </div>
+    <div>
+      <label for="nome">Nome</label>
+      <input id="nome" name="nome" type="text" placeholder="Nome de usuário...">
+    </div>
+    <div>
+      <label for="email">Email</label>
+      <input id="email" name="email" type="email" placeholder="Email de usuário...">
+    </div>
+    <div>
+      <label for="senha">Senha</label>
+      <input id="senha" name="senha" type="password" placeholder="Digite sua senha...">
+    </div>
+    <div>
+      <label for="confirme-senha">Confirme</label>
+      <input id="confirme-senha"type="password" placeholder="Confirme sua senha...">
+    </div>
+    <button type="submit">Criar</button>
+    <a class="btn" href="./entrar.html">Entre na sua Conta</a>
+  </form>
+</section>
+
+<script>
+  const form = document.getElementById('form');
+  const urlServidor = 'https://ferramentas-de-rpg.onrender.com/';
+
+  form.onsubmit = e => {
+    alert()
+    e.preventDefault();
+
+    const formAtual = new FormData(form);
+    const formNovo = new FormData();
+    const data = {}
+    let image;
+
+    formAtual.forEach((valor, chave) => {
+      if(chave === 'image') image = valor;
+      else data[chave] = valor;
+    });
+
+    formNovo.append('data', JSON.stringify(data));
+    formNovo.append('image', image);
+
+    fetch(urlServidor + 'usuarios/salvar', {
+        method: 'POST',
+        body: formNovo
+    })
+    .then(response => response.json())
+    .then(data => console.log('Sucesso:', data))
+    .catch(error => console.error('Erro:', error));
+  }
+</script>
+
+<style>
+  .main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+  }
+
+  p, h1 {
+    text-align: center;
+    margin: 5px;
+  }
+
+  form, input {
+    font-size: 20px;
+  }
+
+  form {
+    text-align: center;
+  }
+
+  form div {
+    display: flex;
+    justify-content: space-between;
+    gap: 5px;
+  }
+</style>
+  </main>
+  <footer>
+
+  </footer>
+</body>
+</html>

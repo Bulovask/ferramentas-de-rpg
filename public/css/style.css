@@ -1,0 +1,41 @@
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+
+  display: grid;
+  grid-template-rows: min-content 1fr min-content;
+
+  background-color: #543;
+  color: #fff;
+}
+
+body, main, section, header, footer {
+  box-sizing: border-box;
+}
+
+body, input, textarea, button {
+  font-family: Calibri;
+}
+
+main {
+  position: relative;
+}
+
+.btn, button {
+  display: inline-block;
+  padding: 10px;
+
+  background-color: #765;
+  color: #fff;
+  font-size: 18px;
+  text-decoration: none;
+  margin: 2px;
+  box-shadow: 1px 1px 2px #000;
+  border: none;
+}
+
+:is(btn, button):active {
+  background-color: #654;
+  box-shadow: 0 0 2px #000;
+}
